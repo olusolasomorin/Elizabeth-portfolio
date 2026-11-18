@@ -1,0 +1,122 @@
+@import 'tailwindcss';
+
+/*
+ * Brand tokens.
+ * --brand-wine and --brand-accent are overridden at runtime from the site settings
+ * (see ThemeSync in ContentProvider) so the owner can retheme from the admin dashboard.
+ */
+:root {
+  --brand-wine: #6e1f3d;
+  --brand-accent: #ff6a3d;
+}
+
+@theme inline {
+  --color-wine: var(--brand-wine);
+  --color-accent: var(--brand-accent);
+}
+
+@theme {
+  --color-paper: #f5eee6;
+  --color-ink: #2b0f1e;
+  --color-blush: #f4c6c0;
+  --color-sand: #eadccb;
+  --color-plum: #4a3540;
+  --color-cocoa: #3a2530;
+  --color-linen: #efe4d8;
+  --color-cream: #fffbf6;
+  --color-polaroid: #fffdf9;
+  --color-mist: #e6d8dc;
+  --color-petal: #f3e3e6;
+  --color-petal-light: #f0dde2;
+  --color-dusk: #d9c9cf;
+  --color-wine-deep: #5a1832;
+  --color-shell: #f5e1dc;
+  --color-success: #2f9e62;
+  --color-success-light: #5fd39a;
+
+  --font-serif: 'Instrument Serif', ui-serif, Georgia, serif;
+  --font-sans: 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --animate-spin-slow: spin 18s linear infinite;
+  --animate-marquee: marquee 28s linear infinite;
+  --animate-fade-in: fade-in 0.25s ease-out;
+  --animate-sheet-up: sheet-up 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+  --animate-modal-in: modal-in 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+  }
+  @keyframes sheet-up {
+    from {
+      transform: translateY(40px);
+      opacity: 0;
+    }
+  }
+  @keyframes modal-in {
+    from {
+      transform: translateY(16px) scale(0.98);
+      opacity: 0;
+    }
+  }
+}
+
+/* Horizontal page gutter used by every section in the design. */
+@utility px-gutter {
+  padding-inline: clamp(20px, 5vw, 72px);
+}
+
+/* Lift-on-hover used by every pill button. */
+@utility lift {
+  transition: transform 0.2s ease;
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-paper font-sans text-ink antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  a {
+    color: inherit;
+  }
+  button {
+    cursor: pointer;
+  }
+  em {
+    font-style: italic;
+  }
+  :focus-visible {
+    outline: 2px solid var(--brand-wine);
+    outline-offset: 3px;
+  }
+  ::selection {
+    background: var(--color-blush);
+    color: var(--color-ink);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
